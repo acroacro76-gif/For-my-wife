@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>عيد ميلاد سعيد فريال 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Amiri:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0b0f19 0%, #1a2a6c 50%, #b21f1f 100%);
+            height: 100vh;
+            overflow: hidden;
+            font-family: 'Cairo', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px; /* لإنشاء العمق ثلاثي الأبعاد */
+            color: #fff;
+        }
+
+        /* مؤثرات الخلفية المضيئة */
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, transparent 0%, #000000 100%);
+            opacity: 0.6;
+            z-index: 1;
+        }
+
+        /* البطاقة الزجاجية - Glassmorphism */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 700px;
+            width: 90%;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            transform-style: preserve-3d;
+            animation: floatCard 6s ease-in-out infinite;
+        }
+
+        @keyframes floatCard {
+            0%, 100% { transform: translateY(0) rotateX(0) rotateY(0); }
+            50% { transform: translateY(-15px) rotateX(2deg) rotateY(-2deg); }
+        }
+
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3rem;
+            color: #ff9a9e;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 154, 158, 0.8);
+            opacity: 0;
+            animation: fadeIn 2s forwards 0.5s;
+        }
+
+        .age-badge {
+            display: inline-block;
+            background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+            color: #000;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            box-shadow: 0 0 15px rgba(253, 160, 133, 0.6);
+            opacity: 0;
+            animation: scaleIn 1s forwards 1.5s;
+        }
+
+        p.message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            text-align: justify;
+            text-align-last: center;
+            min-height: 250px; /* للحفاظ على مساحة النص أثناء الكتابة */
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* العناصر الطائرة (حيتان، باندا، طيور) */
+        .flying-entity {
+            position: absolute;
+            pointer-events: none;
+            z-index: 5;
+            filter: drop-shadow(0 15px 15px rgba(0,0,0,0.6)); /* تأثير الظل لإعطاء عمق 3D */
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="overlay"></div>
+
+    <div class="glass-card" id="card">
+        <h1>إلى ملاذي الآمن.. فريال</h1>
+        <div class="age-badge">25 عاماً من النور</div>
+        <p class="message" id="typewriter"></p>
+    </div>
+
+    <script>
+        // --- 1. الرسالة العاطفية المبنية على سيكولوجيا الارتباط ---
+        const text = "اليوم لا تكتمل الأرض بـ 25 عاماً من عمرك فقط، بل تكتمل بوجودك فيها. في علم النفس، يُقال أن الإنسان حين يجد 'ملاذه الآمن'، تهدأ كل عواصفه الداخلية، تتلاشى دفاعاته، ويعود لطبيعته الصافية.. وأنتِ لم تكوني يوماً مجرد شخص في حياتي، بل كنتِ هذا الملاذ. أنتِ الدفء الذي أختبئ فيه من العالم، والمكان الذي أكون فيه أنا، بكل صدق وبدون أقنعة.\n\n25 عاماً من الرقة، من الجمال، ومن النور الذي تشعينه أينما حللتِ. لم أكن أؤمن بالمعجزات حتى رأيت كيف يمكن لابتسامة واحدة منكِ أن تعيد ترتيب فوضى أيامي.\n\nكل عام وأنتِ سيدة قلبي، النبض الذي أعيش به، والقصة التي لا أريدها أن تنتهي.\nأحبكِ، بحجم هذا الكون وما فيه.";
+        
+        let i = 0;
+        const speed = 60; // سرعة الكتابة (تأثير نفسي لشد الانتباه)
+        
+        function typeWriter() {
+            if (i < text.length) {
+                let char = text.charAt(i);
+                if(char === '\n') {
+                    document.getElementById("typewriter").innerHTML += "<br>";
+                } else {
+                    document.getElementById("typewriter").innerHTML += char;
+                }
+                i++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        // بدء الكتابة بعد ثانيتين من فتح الموقع
+        setTimeout(typeWriter, 2500);
+
+        // --- 2. نظام توليد الكائنات الطائرة بثلاثية الأبعاد الوهمية ---
+        const entities = ['🐋', '🐼', '🕊️', '✨'];
+        
+        function createFlyingEntity() {
+            const el = document.createElement('div');
+            el.classList.add('flying-entity');
+            
+            // اختيار كائن عشوائي
+            el.innerText = entities[Math.floor(Math.random() * entities.length)];
+            
+            // تحديد الحجم والعمق العشوائي (وهم الـ 3D)
+            const size = Math.random() * 40 + 20; // بين 20px و 60px
+            const zIndex = Math.random() * 1000 - 500; // عمق المحور Z
+            const blurEffect = zIndex < -200 ? 'blur(2px)' : 'blur(0)'; // الكائنات البعيدة ضبابية
+            
+            el.style.fontSize = `${size}px`;
+            el.style.filter = `drop-shadow(0 15px 15px rgba(0,0,0,0.5)) ${blurEffect}`;
+            
+            // تحديد نقطة الانطلاق
+            const startY = Math.random() * window.innerHeight;
+            const startX = -100; // يبدأ من خارج الشاشة يساراً
+            
+            el.style.top = `${startY}px`;
+            el.style.left = `${startX}px`;
+            el.style.transform = `translateZ(${zIndex}px)`;
+            
+            document.body.appendChild(el);
+            
+            // تحريك الكائن
+            let currentX = startX;
+            let currentY = startY;
+            const speedX = Math.random() * 1.5 + 0.5; // سرعة أفقية
+            const waveAmplitude = Math.random() * 2; // ارتفاع الموجة
+            const waveSpeed = Math.random() * 0.05; // سرعة التموج
+            let angle = 0;
+
+            function animateEntity() {
+                currentX += speedX;
+                angle += waveSpeed;
+                currentY += Math.sin(angle) * waveAmplitude; // حركة متموجة طبيعية
+                
+                // دوران طفيف لتعزيز الـ 3D
+                const rotateX = Math.sin(angle) * 15;
+                const rotateY = Math.cos(angle) * 15;
+
+                el.style.transform = `translateX(${currentX}px) translateY(${currentY - startY}px) translateZ(${zIndex}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                
+                // إزالة الكائن عند خروجه من الشاشة لعدم استهلاك الذاكرة
+                if (currentX > window.innerWidth + 100) {
+                    el.remove();
+                } else {
+                    requestAnimationFrame(animateEntity);
+                }
+            }
+            
+            animateEntity();
+        }
+
+        // توليد كائن جديد كل ثانية تقريباً
+        setInterval(createFlyingEntity, 1200);
+
+        // --- 3. تأثير التفاعل مع الماوس (Parallax 3D) ---
+        document.addEventListener('mousemove', (e) => {
+            const card = document.getElementById('card');
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+        
+        // إعادة البطاقة لوضعها الطبيعي عند خروج الماوس
+        document.addEventListener('mouseleave', () => {
+            const card = document.getElementById('card');
+            card.style.transform = `rotateY(0deg) rotateX(0deg)`;
+            card.style.transition = 'transform 0.5s ease';
+        });
+        
+        document.addEventListener('mouseenter', () => {
+            const card = document.getElementById('card');
+            card.style.transition = 'none';
+        });
+
+    </script>
+</body>
+</html>
