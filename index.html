@@ -3,16 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إلى سكون الروح.. فريال 💖</title>
-    <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>إلى فاتنتي فريال 💖</title>
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #ff0844;
-            --secondary: #ffb199;
-            --bg-dark: #0a0002;
-            --glass-bg: rgba(25, 0, 5, 0.5);
-            --glass-border: rgba(255, 100, 120, 0.2);
-            --text-gold: #ffdf73;
+            --bg-color: #050002;
+            --btn-color: #ff0844;
+            --btn-glow: rgba(255, 8, 68, 0.5);
+            --text-main: #fff0f3;
+            --gold: #ffdf73;
         }
 
         * {
@@ -22,271 +21,209 @@
         }
 
         body {
-            background-color: var(--bg-dark);
-            font-family: 'Cairo', sans-serif;
-            color: #fff;
-            overflow-x: hidden;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at center, #2a0008 0%, var(--bg-color) 100%);
             min-height: 100vh;
-            cursor: default;
+            font-family: 'Tajawal', sans-serif;
+            color: var(--text-main);
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        /* الخلفية التفاعلية */
-        #interactive-canvas {
+        /* حاوية المؤثرات البصرية */
+        #particle-canvas {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1;
-            pointer-events: auto;
+            pointer-events: none;
+            z-index: 9999;
         }
 
-        /* تدرج لوني متحرك في الخلفية */
-        .bg-gradient {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, #3a0008 0%, var(--bg-dark) 80%);
-            z-index: 0;
-            animation: pulseBg 8s infinite alternate;
-        }
-
-        @keyframes pulseBg {
-            0% { transform: scale(1); opacity: 0.8; }
-            100% { transform: scale(1.1); opacity: 1; }
-        }
-
-        /* شاشة الدخول */
-        #intro-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            background: var(--bg-dark);
-            transition: opacity 2s ease-in-out;
-        }
-
-        .heart-btn {
-            font-size: 4rem;
-            cursor: pointer;
-            animation: heartbeat 1.2s infinite;
-            filter: drop-shadow(0 0 20px var(--primary));
-            user-select: none;
-            transition: transform 0.3s;
-        }
-        
-        .heart-btn:hover {
-            transform: scale(1.2);
-        }
-
-        @keyframes heartbeat {
-            0% { transform: scale(1); }
-            14% { transform: scale(1.3); }
-            28% { transform: scale(1); }
-            42% { transform: scale(1.3); }
-            70% { transform: scale(1); }
-        }
-
-        /* الحاوية الرئيسية للرسالة */
-        .main-container {
-            position: relative;
+        /* العنوان الرئيسي */
+        header {
+            text-align: center;
+            margin-top: 5vh;
+            margin-bottom: 3vh;
             z-index: 10;
-            display: none; /* تظهر بعد النقر */
-            flex-direction: column;
-            align-items: center;
-            padding: 50px 20px;
-            min-height: 100vh;
+            animation: fadeInDown 1.5s ease;
         }
 
-        /* البطاقة الزجاجية المعقدة */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 40px;
-            padding: 60px 50px;
-            max-width: 900px;
-            width: 100%;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.8), 
-                        inset 0 0 40px rgba(255, 8, 68, 0.1);
+        h1 {
+            font-family: 'Amiri', serif;
+            font-size: 3.5rem;
+            background: linear-gradient(to right, #ff8a00, #e52e71);
+            -webkit-background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(229, 46, 113, 0.3);
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+        }
+
+        /* شبكة الأزرار السحرية */
+        .buttons-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            z-index: 10;
+            width: 90%;
+            max-width: 600px;
+            margin-bottom: 30px;
+        }
+
+        .magic-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 8, 68, 0.3);
+            border-radius: 15px;
+            padding: 20px 10px;
+            color: var(--text-main);
+            font-family: 'Tajawal', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 15px transparent;
             position: relative;
             overflow: hidden;
-            opacity: 0;
-            transform: translateY(50px);
-            animation: floatUp 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
         }
 
-        /* تأثير اللمعان على البطاقة */
-        .glass-panel::before {
+        .magic-btn::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.03), transparent);
-            transform: rotate(45deg);
-            animation: shine 6s infinite;
-            pointer-events: none;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: all 0.5s;
         }
 
-        @keyframes floatUp {
+        .magic-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            border-color: var(--btn-color);
+            box-shadow: 0 10px 25px var(--btn-glow);
+            background: rgba(255, 8, 68, 0.1);
+        }
+
+        .magic-btn:hover::before {
+            left: 100%;
+        }
+
+        /* منطقة عرض الرسائل */
+        .message-board {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(10, 0, 2, 0.6);
+            border: 1px solid rgba(255, 223, 115, 0.2);
+            border-radius: 20px;
+            padding: 40px;
+            min-height: 300px;
+            z-index: 10;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            margin-bottom: 5vh;
+        }
+
+        .message-text {
+            font-family: 'Amiri', serif;
+            font-size: 1.5rem;
+            line-height: 2.2;
+            text-align: justify;
+            text-align-last: center;
+            color: #fff;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            display: none;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .message-text.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .initial-text {
+            color: rgba(255,255,255,0.5);
+            font-size: 1.2rem;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        @keyframes shine {
-            0% { transform: translateX(-100%) rotate(45deg); }
-            100% { transform: translateX(100%) rotate(45deg); }
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 1; }
         }
 
-        .title {
-            font-family: 'Aref Ruqaa', serif;
-            font-size: 4.5rem;
-            text-align: center;
-            background: linear-gradient(to right, var(--secondary), var(--primary), var(--secondary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 20px;
-            text-shadow: 0 10px 30px rgba(255, 8, 68, 0.3);
-        }
-
-        .subtitle {
-            text-align: center;
-            font-size: 1.5rem;
-            color: var(--text-gold);
-            margin-bottom: 40px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            border-bottom: 1px solid rgba(255, 223, 115, 0.3);
-            padding-bottom: 20px;
-        }
-
-        .message-content {
-            font-size: 1.4rem;
-            line-height: 2.2;
-            text-align: justify;
-            color: #f8e5e5;
-            font-weight: 300;
-        }
-
-        .paragraph {
-            margin-bottom: 25px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 1s, transform 1s;
-        }
-
-        .highlight {
-            color: var(--secondary);
-            font-weight: 600;
-            text-shadow: 0 0 10px rgba(255, 177, 153, 0.5);
-        }
-
-        /* تنسيق شريط التمرير */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 10px; }
-
-        @media (max-width: 768px) {
-            .title { font-size: 3rem; }
-            .glass-panel { padding: 40px 25px; }
-            .message-content { font-size: 1.2rem; }
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .buttons-grid { grid-template-columns: 1fr; gap: 15px; }
+            .message-text { font-size: 1.2rem; padding: 10px; }
+            .message-board { padding: 25px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-gradient"></div>
-    <canvas id="interactive-canvas"></canvas>
+    <canvas id="particle-canvas"></canvas>
 
-    <!-- شاشة البداية التفاعلية -->
-    <div id="intro-screen">
-        <div class="heart-btn" onclick="startExperience()">❤️<br><span style="font-size: 1rem; font-family: 'Cairo'; color: #fff; display: block; text-align: center; margin-top: 10px; opacity: 0.7;">المسي القلب</span></div>
+    <header>
+        <h1>فريال</h1>
+        <p>عيد ميلادك الـ 25 .. ربع قرن من السحر</p>
+    </header>
+
+    <div class="buttons-grid">
+        <button class="magic-btn" onclick="showMessage(0, event)">✨ سر الجمال</button>
+        <button class="magic-btn" onclick="showMessage(1, event)">🧠 الملاذ النفسي</button>
+        <button class="magic-btn" onclick="showMessage(2, event)">💍 الوعد الأبدي</button>
+        <button class="magic-btn" onclick="showMessage(3, event)">🎉 ميلاد النور</button>
     </div>
 
-    <!-- المحتوى الرئيسي -->
-    <div class="main-container" id="main-content">
-        <div class="glass-panel">
-            <h1 class="title">إلى ملاذي.. فريال</h1>
-            <div class="subtitle">ربع قرن من النور | 25 عاماً</div>
-            
-            <div class="message-content" id="message-box">
-                <!-- سيتم حقن النص هنا برمجياً -->
-            </div>
+    <div class="message-board">
+        <div class="initial-text" id="initial-text">اضغطي على الأزرار لاكتشاف ما يخفيه قلبي...</div>
+        
+        <div class="message-text" id="msg-0">
+            أقف مبهوتاً أمام لوحة فنية صاغها الخالق بدقة لا متناهية. دعيني أخبركِ عن شَعركِ الطويل، الذي ينسدل كشلال من الليل المظلم، ليأسر كل حواسي مع كل نسمة هواء تداعبه. وعن عينيكِ.. آه من عينيكِ! تملكان ذلك السحر الخاص، بتفصيلتهما التي تشبه جمال العيون الكورية، نظرة واحدة منها قادرة على اختراق دروعي وإرباك نبضي بالكامل. أما بياضكِ الخلاب، فهو كضوء القمر الذي بدد عتمة أيامي. أنتِ لستِ جميلة فحسب، بل أنتِ "الجمال" يمشي على قدمين، تسرقين الأنفاس دون أن تدركي ذلك، وتجعلينني أتساءل دائماً: كيف يمكن لبشر أن يحمل كل هذا السحر؟
+        </div>
+        
+        <div class="message-text" id="msg-1">
+            في علم النفس، يُقال أن أعمق حاجة إنسانية ليست الحب فقط، بل "أن تُرى وأن تُفهم دون أن تضطر لشرح نفسك". وهذا بالضبط ما أنتِ عليه بالنسبة لي. أنتِ لستِ فقط حبيبتي، أنتِ "مرآتي النفسية"، عندما أكون معكِ، ينخفض مستوى هرمونات التوتر (الكورتيزول) في دمي، ويرتفع الدوبامين والأوكسيتوسين ليغمرني شعور بالانتماء المطلق. لقد رممتِ أجزائي التي لم أكن أعلم أنها مكسورة، وأصبحتِ "القاعدة الآمنة" التي أستند إليها لأواجه هذا العالم القاسي. حبكِ ليس مجرد عاطفة، بل هو استقرار روحي، وعلاج لكل ندوب الماضي، ومكان أستريح فيه من عناء الوجود.
+        </div>
+        
+        <div class="message-text" id="msg-2">
+            هنا، وأمام نبضات قلبي التي تتسارع بذكر اسمك، أقطع لكِ وعداً صادقاً لا تمحوه الأيام ولا تغيره الظروف. أعدكِ أن أكون ظلكِ حين تشتد حرارة الأيام، وأن أكون سندكِ حين تميل بكِ الأرض. أعدكِ بحبٍ لا يشيخ، وبشغفٍ لا ينطفئ، وبقلبٍ يرى فيكِ دائمًا تلك الفتاة الاستثنائية التي خطفت روحه من النظرة الأولى. سأكون لكِ الحبيب والصديق، وسأبقى أختاركِ أنتِ، في كل يوم، وفي كل موقف، وفي كل حياة. هذا ليس مجرد كلام، بل هو عهدٌ حفرته في روحي، وسأقضي عمري كله أثبته لكِ بالأفعال.
+        </div>
+        
+        <div class="message-text" id="msg-3">
+            اليوم تكتمل الأرض بربع قرن من وجودكِ فيها. 25 عاماً من النور، والرقة، والضحكات التي تشفي الروح. كل عام وأنتِ سيدة قلبي، وأميرة تفاصيلي، وأجمل أقداري. في يوم ميلادك، لا أتمنى لكِ السعادة فقط، بل أتمنى أن أكون أنا سبب هذه السعادة. فكل عام وأنتِ تزهرين أكثر، وتزدادين سحراً أكثر، وتتربعين على عرش قلبي أكثر. أحبكِ بحجم السماء، وبعدد القلوب التي ستتطاير الآن أمام عينيكِ.. ميلاد سعيد يا ملاذي.
         </div>
     </div>
 
     <script>
         // ==========================================
-        // 1. نظام الرسالة النفسية المطولة (Reveal System)
+        // محرك المؤثرات البصرية للقلوب المتدفقة (Canvas)
         // ==========================================
-        const paragraphs = [
-            "في لغة الأرقام، 25 عاماً هي مجرد قياس للزمن.. لكن في لغة الروح والوجود، هي اكتمال ربع قرن من السحر، مسيرة من النور الذي كان يتشكل بهدوء ليضيء عالمي. لم تكوني يوماً مجرد مصادفة في حياتي، بل كنتِ الوجهة التي لم أكن أعلم أنني أبحث عنها.",
-            "في علم النفس، يتحدث 'جون بولبي' عن نظرية <span class='highlight'>القاعدة الآمنة (Secure Base)</span>؛ وهي الحالة التي يجد فيها الإنسان شخصاً يمنحه الأمان المطلق، ليتمكن من استكشاف العالم ومواجهة فوضاه وهو مطمئن لأن لديه ملجأ يعود إليه. أنتِ يا فريال لستِ فقط حبيبتي، أنتِ قاعدتي الآمنة، المكان الذي تسقط فيه كل دفاعاتي، وأتجرد فيه من كل أقنعتي لأكون أنا.. فقط أنا.",
-            "هناك ظاهرة نفسية تُسمى <span class='highlight'>'التنظيم العاطفي المتبادل'</span>، حيث تستطيع أرواح معينة أن تضبط إيقاع بعضها البعض. هل تلاحظين كيف يهدأ قلقي بمجرد سماع صوتك؟ كيف تعيد ابتسامتك ترتيب الفوضى داخل رأسي؟ هذا ليس مجرد حب، هذا التحام روحي وعقلي لا يحدث إلا مرة في العمر.",
-            "في يوم ميلادك، أرى فيكِ عمق <span class='highlight'>'الحوت'</span> الذي يغوص في أعمق وأصدق نقطة في قلبي، وأرى رقة <span class='highlight'>'الباندا'</span> التي تسرق الابتسامة من شفتي بعفويتها ولطفها الذي لا يُقاوم، وأرى حرية <span class='highlight'>'الطير'</span> الذي يحلق بروحي عالياً بعيداً عن ضجيج هذا العالم.",
-            "كل عام وأنتِ النسخة الأجمل من نفسك، كل عام وأنتِ المرأة التي تجعلني أريد أن أكون رجلاً أفضل (تأثير بجماليون). أنتِ لستِ فقط جزءاً من حياتي، أنتِ العدسة التي أرى من خلالها جمال هذه الحياة.",
-            "أحبكِ.. بعمق البحر، وبسماء الطيور، وبكل نبضة قلب في هذا الكون. ميلاد سعيد يا سيدة القلب."
-        ];
-
-        function startExperience() {
-            // إخفاء شاشة البداية بصمت
-            const intro = document.getElementById('intro-screen');
-            intro.style.opacity = '0';
-            setTimeout(() => {
-                intro.style.display = 'none';
-                document.getElementById('main-content').style.display = 'flex';
-                renderMessage();
-            }, 1000);
-        }
-
-        function renderMessage() {
-            const container = document.getElementById('message-box');
-            paragraphs.forEach((text, index) => {
-                const p = document.createElement('div');
-                p.className = 'paragraph';
-                p.innerHTML = text;
-                container.appendChild(p);
-                
-                // تأثير ظهور متدرج للفقرات
-                setTimeout(() => {
-                    p.style.opacity = '1';
-                    p.style.transform = 'translateY(0)';
-                }, 800 + (index * 1500)); // تأخير بين كل فقرة وأخرى لتركيز القراءة
-            });
-        }
-
-        // ==========================================
-        // 2. محرك الفيزياء البصرية (Interactive Canvas Engine)
-        // ==========================================
-        const canvas = document.getElementById('interactive-canvas');
+        const canvas = document.getElementById('particle-canvas');
         const ctx = canvas.getContext('2d');
-        
         let width, height;
         let particles = [];
-        
-        // تتبع حركة الماوس لإنشاء تأثير التنافر (Repel Effect)
-        let mouse = { x: null, y: null, radius: 150 };
-
-        window.addEventListener('mousemove', (event) => {
-            mouse.x = event.x;
-            mouse.y = event.y;
-        });
-        
-        // عند خروج الماوس من الشاشة
-        window.addEventListener('mouseout', () => {
-            mouse.x = undefined;
-            mouse.y = undefined;
-        });
 
         function resize() {
             width = canvas.width = window.innerWidth;
@@ -295,123 +232,102 @@
         window.addEventListener('resize', resize);
         resize();
 
-        const heartColors = ['#ff0844', '#ffb199', '#cc0022', '#ff4d4d'];
-        const entities = ['🐼', '🐋', '🕊️', '✨'];
-
-        class Particle {
-            constructor() {
-                this.init();
-                this.y = Math.random() * height; // توزيع ابتدائي
-            }
-
-            init() {
-                this.isEntity = Math.random() > 0.65;
-                if (this.isEntity) {
-                    this.char = entities[Math.floor(Math.random() * entities.length)];
-                    this.size = Math.random() * 35 + 15;
-                    this.mass = this.size * 0.1;
-                } else {
-                    this.color = heartColors[Math.floor(Math.random() * heartColors.length)];
-                    this.size = Math.random() * 12 + 4;
-                    this.mass = this.size * 0.05;
-                }
-
-                this.x = Math.random() * width;
-                this.y = height + this.size + Math.random() * 200;
-                this.baseX = this.x;
+        // كائن القلب المتفجر
+        class ExplodingHeart {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                // سرعات عشوائية للانفجار في كل الاتجاهات
+                const angle = Math.random() * Math.PI * 2;
+                const speed = Math.random() * 15 + 5; // سرعة التدفق
+                this.vx = Math.cos(angle) * speed;
+                this.vy = Math.sin(angle) * speed - 5; // اتجاه علوي طفيف
                 
-                this.velocity = {
-                    y: -(Math.random() * 1.5 + 0.5),
-                    x: (Math.random() - 0.5) * 1
-                };
+                this.size = Math.random() * 15 + 10;
+                this.life = 1; // الشفافية والعمر
+                this.decay = Math.random() * 0.01 + 0.015; // سرعة الاختفاء
                 
-                this.angle = Math.random() * 360;
-                this.spin = (Math.random() - 0.5) * 2;
-                this.opacity = Math.random() * 0.6 + 0.2;
+                // تدرجات الأحمر للقلوب
+                const colors = ['#ff0040', '#ff1a1a', '#ff4d4d', '#cc0022'];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                
+                this.gravity = 0.4; // الجاذبية ليعود القلب للسقوط
+                this.rotation = Math.random() * 360;
+                this.rotationSpeed = (Math.random() - 0.5) * 10;
             }
 
             update() {
-                // الحركة الأساسية
-                this.y += this.velocity.y;
-                this.x += Math.sin(this.angle * Math.PI / 180) * 1.5 + this.velocity.x;
-                this.angle += this.spin;
-
-                // -----------------------------------
-                // فيزياء التفاعل مع الماوس (Collision & Repel)
-                // -----------------------------------
-                if (mouse.x != null && mouse.y != null) {
-                    let dx = mouse.x - this.x;
-                    let dy = mouse.y - this.y;
-                    let distance = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (distance < mouse.radius) {
-                        const forceDirectionX = dx / distance;
-                        const forceDirectionY = dy / distance;
-                        const force = (mouse.radius - distance) / mouse.radius;
-                        
-                        // دفع الجزيئات بعيداً عن الماوس
-                        const pushX = forceDirectionX * force * 5 * this.mass;
-                        const pushY = forceDirectionY * force * 5 * this.mass;
-                        
-                        this.x -= pushX;
-                        this.y -= pushY;
-                    }
-                }
-
-                // إعادة التدوير عند الخروج من الشاشة
-                if (this.y < -100 || this.x < -100 || this.x > width + 100) {
-                    this.init();
-                    this.y = height + 50;
-                }
+                this.vy += this.gravity;
+                this.x += this.vx;
+                this.y += this.vy;
+                this.life -= this.decay;
+                this.rotation += this.rotationSpeed;
             }
 
             draw() {
+                if (this.life <= 0) return;
                 ctx.save();
                 ctx.translate(this.x, this.y);
-                ctx.rotate(this.angle * Math.PI / 180);
-                ctx.globalAlpha = this.opacity;
-
-                if (this.isEntity) {
-                    ctx.font = `${this.size}px Arial`;
-                    ctx.textAlign = 'center';
-                    ctx.textBaseline = 'middle';
-                    ctx.fillText(this.char, 0, 0);
-                } else {
-                    ctx.fillStyle = this.color;
-                    ctx.shadowBlur = 10;
-                    ctx.shadowColor = this.color;
-                    ctx.beginPath();
-                    const topCurveHeight = this.size * 0.3;
-                    ctx.moveTo(0, topCurveHeight);
-                    ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
-                    ctx.bezierCurveTo(-this.size / 2, this.size / 2, 0, this.size * 0.8, 0, this.size);
-                    ctx.bezierCurveTo(0, this.size * 0.8, this.size / 2, this.size / 2, this.size / 2, topCurveHeight);
-                    ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
-                    ctx.closePath();
-                    ctx.fill();
-                }
+                ctx.rotate(this.rotation * Math.PI / 180);
+                ctx.globalAlpha = this.life;
+                ctx.fillStyle = this.color;
+                
+                // رسم مسار القلب
+                ctx.beginPath();
+                const topCurveHeight = this.size * 0.3;
+                ctx.moveTo(0, topCurveHeight);
+                ctx.bezierCurveTo(0, 0, -this.size / 2, 0, -this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(-this.size / 2, this.size / 2, 0, this.size * 0.8, 0, this.size);
+                ctx.bezierCurveTo(0, this.size * 0.8, this.size / 2, this.size / 2, this.size / 2, topCurveHeight);
+                ctx.bezierCurveTo(this.size / 2, 0, 0, 0, 0, topCurveHeight);
+                ctx.closePath();
+                ctx.fill();
                 ctx.restore();
             }
         }
 
-        // إنشاء شبكة الجزيئات (زيادة العدد لجمالية أكبر)
-        for (let i = 0; i < 90; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateCanvas() {
-            // مسح الشاشة مع تأثير ذيل ضبابي خفيف (Trail Effect)
-            ctx.fillStyle = 'rgba(10, 0, 2, 0.3)'; 
-            ctx.fillRect(0, 0, width, height);
+        // حلقة الرسم المستمرة
+        function animate() {
+            ctx.clearRect(0, 0, width, height);
             
-            for (let i = 0; i < particles.length; i++) {
+            // تحديث ورسم القلوب
+            for (let i = particles.length - 1; i >= 0; i--) {
                 particles[i].update();
                 particles[i].draw();
+                if (particles[i].life <= 0) {
+                    particles.splice(i, 1);
+                }
             }
-            requestAnimationFrame(animateCanvas);
+            requestAnimationFrame(animate);
         }
+        animate();
 
-        animateCanvas();
+        // ==========================================
+        // نظام تفاعل الأزرار وعرض الرسائل
+        // ==========================================
+        function showMessage(id, event) {
+            // 1. توليد انفجار القلوب من مكان الزر المضغوط
+            const rect = event.target.getBoundingClientRect();
+            const startX = rect.left + rect.width / 2;
+            const startY = rect.top + rect.height / 2;
+            
+            // توليد 100 قلب دفعة واحدة للتدفق
+            for (let i = 0; i < 100; i++) {
+                particles.push(new ExplodingHeart(startX, startY));
+            }
+
+            // 2. إخفاء النص الابتدائي وكل الرسائل الأخرى
+            document.getElementById('initial-text').style.display = 'none';
+            const allMessages = document.querySelectorAll('.message-text');
+            allMessages.forEach(msg => {
+                msg.classList.remove('active');
+            });
+
+            // 3. إظهار الرسالة المطلوبة بتأثير سلس
+            setTimeout(() => {
+                document.getElementById('msg-' + id).classList.add('active');
+            }, 100);
+        }
     </script>
 </body>
 </html>
